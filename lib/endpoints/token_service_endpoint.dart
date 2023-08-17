@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
@@ -22,7 +23,9 @@ Future<String> logIn({
   if (response.statusCode == 200) {
     final responseData = json.decode(response.body);
     final accessToken = responseData['access'];
-    print(accessToken);
+    if (kDebugMode) {
+      print(accessToken);
+    }
     return accessToken;
   } else {
     onError?.call();
