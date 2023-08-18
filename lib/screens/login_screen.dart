@@ -1,9 +1,7 @@
 import 'package:cpims_app/constants/global_constants.dart';
 import 'package:cpims_app/endpoints/token_service_endpoint.dart';
-import 'package:cpims_app/screens/home_screen.dart';
 import 'package:cpims_app/widgets/custom_button.dart';
 import 'package:cpims_app/widgets/custom_text_field.dart';
-import 'package:cpims_app/widgets/snack_bar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -23,25 +21,11 @@ class LoginScreen extends StatelessWidget {
       required String password,
     }) async {
       try {
-        final accessToken = await logIn(
+        await logIn(
           context: context,
           userName: userName,
           password: password,
-          onError: () {
-            showSnackBar(context, 'Error occurred while logging in.');
-          },
         );
-
-        if (context.mounted) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => HomeScreen(
-                accessToken: accessToken,
-              ),
-            ),
-          );
-        }
       } catch (e) {
         if (kDebugMode) {
           print('Error logging in $e');
@@ -97,6 +81,7 @@ class LoginScreen extends StatelessWidget {
                         text: 'Login',
                         color: Colors.deepPurple,
                         onTap: () {
+                          // Call the [signIn] method only if the form has no errors
                           if (signInFormKey.currentState!.validate()) {
                             signIn(
                               userName: userNameController.text,

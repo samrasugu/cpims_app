@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cpims_app/widgets/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
@@ -21,6 +22,9 @@ Future<Map<String, dynamic>> fetchDashboardData({
     final responseData = json.decode(response.body);
     return responseData;
   } else {
+    if (context.mounted) {
+      showSnackBar(context, response.body);
+    }
     throw Exception('Failed to fetch dashboard data');
   }
 }
