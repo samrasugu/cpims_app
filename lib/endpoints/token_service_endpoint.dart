@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 // function to make API call to token endpoint and retrieve the access token
 // @param - username
 // @param - password
-// @return - the access token if the API call is successful
+// @navigate the user to home screen and pass the access token - if the API call is successful
 // else - throw an error
 Future<void> logIn({
   required BuildContext context,

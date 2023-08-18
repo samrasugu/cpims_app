@@ -4,6 +4,10 @@ import 'package:cpims_app/widgets/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+// handle HTTP response errors from API request
+// provides appropriate user feedback within the application. 
+// It allows for efficient error handling based on the HTTP status code of the response, 
+// displaying relevant error messages or executing a success callback function.
 void httpErrorHandle({
   required http.Response response,
   required BuildContext context,
